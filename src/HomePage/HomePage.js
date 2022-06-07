@@ -12,6 +12,7 @@ import {nanoid} from 'nanoid';
 
  const HomePage = () => {
    //const [data, error, loading] = useFetchRequest(process.env.REACT_APP_URL, []);
+
    /*этот кусок убрали за счет сontex
    const [data, error, loading] =useFetchRequest(process.env.REACT_APP_URL, {
     header:{
@@ -23,8 +24,9 @@ import {nanoid} from 'nanoid';
    console.log('data in HomePage', data);
 */
    const blog = useContext(PostContext);
-   console.log('data inheritcontex HomePage', blog, blog.posts);
-
+   const {posts, error, loading} = blog;
+   console.log('data  через contex HomePage', blog, blog.posts);
+   console.log('posts error loading in HomePage', posts,error,loading);
    //const match = useMatch();
    //console.log('match in HomePage', match);
    const navigate = useNavigate();
@@ -39,7 +41,7 @@ import {nanoid} from 'nanoid';
      console.log('отрисовка постов');
     return (
       <ul className='list'>
-        {blog.posts.map(o => <Post key={nanoid()} id= {o.id} onClick={() => handlerClick(o.id)} content={o.content} created={o.created}/>)}
+        {posts.map(o => <Post key={nanoid()} id= {o.id} onClick={() => handlerClick(o.id)} content={o.content} created={o.created}/>)}
       </ul>
       )
   }
@@ -52,7 +54,7 @@ import {nanoid} from 'nanoid';
           </NavLink>
         </nav>
         <div className='allPosts'>
-          {(!loading || !error) ? loadedList() : <div>Loading ...</div>}
+          {(!loading && !error) ? loadedList() : <div>Loading ...</div>}
           {error && <div>{error.text}</div>}
         </div>
      </>
@@ -63,15 +65,3 @@ export default HomePage;
 
 //{(!loading && !error) ? loadedList() : <div>Loading ...</div>}
 
-
-/*
-<NavLink to="/drift" className={({ isActive }) => isActive ? "menu__item-active menu__item" : "menu__item"}>
-          Дрифт-такси
-        </NavLink>
-        <NavLink to="/timeattack" className={({ isActive }) => isActive ? "menu__item-active menu__item" : "menu__item"}>
-          Time Attack
-        </NavLink>
-        <NavLink to="/forza" className={({ isActive }) => isActive ? "menu__item-active menu__item" : "menu__item"}>
-          Forza Karting
-        </NavLink>
-*/

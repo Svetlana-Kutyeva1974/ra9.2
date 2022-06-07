@@ -22,7 +22,9 @@ export default function PostProvider(props) {
   //console.log('finder PostPr-----', finder);
 
   const value = {
-    posts: data
+    posts: data,
+    loading : loading,
+    error: error
 };
   return (
     //<PostContext.Provider value={{id, content, created}}>
