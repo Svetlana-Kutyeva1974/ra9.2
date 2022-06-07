@@ -6,22 +6,26 @@ const PageCreateNew = () =>
   (
    <>
    <article className="article">
-      <h1 className="article__title"> Публикация
-      <span> Фото/Видео   </span>
-      <span> Прямой эфир   </span>
-      <div className='sss2'>
+      <h1 className="article__title">
+  
+      <span className="article__nav"> == Публикация ==   </span>
+      <span className="article__nav"> == Фото/Видео ==   </span>
+      <span className="article__nav"> == Прямой эфир ==   </span>
+      <div className=' sss2'>
         <NavLink to='/' >
             &#10008;
-          </NavLink>
+        </NavLink>
       </div>
-      </h1>
      
+      </h1>
+      <hr></hr>
       <p className="article__paragraph">
-       ghb
+      PageCreate: Name
       </p>
       <p className="article__paragraph">
-      PageCreate
+       Текст
       </p>
+      
           <NavLink to='/' className={'menu__item'}>
             <span className='sss'>Опубликовать пост</span>
           </NavLink>

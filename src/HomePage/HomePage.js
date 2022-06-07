@@ -5,15 +5,26 @@ import useFetchRequest from '../hook/useFetchRequest';
 import Post from '../Post/Post';
 import { useNavigate } from 'react-router';
 import './HomePage.css';
-//import PostContext from '../PostContext/PostContex';
-//import { useContext } from 'react';
+import PostContext from '../PostContext/PostContex';
+import { useContext } from 'react';
+import {nanoid} from 'nanoid';
 //import PostProvider from '../PostContext/PostContex';
 
  const HomePage = () => {
    //const [data, error, loading] = useFetchRequest(process.env.REACT_APP_URL, []);
-   
-   const [data, error, loading] =useFetchRequest(`${process.env.REACT_APP_URL}/posts`, null);
+   /*этот кусок убрали за счет сontex
+   const [data, error, loading] =useFetchRequest(process.env.REACT_APP_URL, {
+    header:{
+       'Content - Type': 'application/json'
+   },
+    method: 'GET',
+    body: null
+  });
    console.log('data in HomePage', data);
+*/
+   const blog = useContext(PostContext);
+   console.log('data inheritcontex HomePage', blog, blog.posts);
+
    //const match = useMatch();
    //console.log('match in HomePage', match);
    const navigate = useNavigate();
@@ -28,7 +39,7 @@ import './HomePage.css';
      console.log('отрисовка постов');
     return (
       <ul className='list'>
-        {data.map(o => <Post key={o.id} id= {o.id} onClick={() => handlerClick(o.id)} content={o.content} created={o.created}/>)}
+        {blog.posts.map(o => <Post key={nanoid()} id= {o.id} onClick={() => handlerClick(o.id)} content={o.content} created={o.created}/>)}
       </ul>
       )
   }

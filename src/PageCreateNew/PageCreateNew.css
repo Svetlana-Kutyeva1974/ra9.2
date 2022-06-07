@@ -25,6 +25,10 @@ body {
   background: #ffffff;
 }
 
+a {
+  text-decoration: none; 
+ } 
+
 .page {
   width: 90%;
   max-width: 1000px;
@@ -101,13 +105,17 @@ body {
   background: #5191c5;
   border-radius: 5px;
   margin-right: 20px;
-  margin-left: 100px;
+  margin-left: 50px;
 }
 
 .sss2{
   align-content: initial;
   background: #5191c5;
   border-radius: 5px;
-  margin-left: 400px;
+  margin-left: 50px;
+  text-align: right;
   height: 30px;
+}
+.article__nav{
+  width: 30%;
 }

@@ -10,11 +10,12 @@ moment.locale('ru');
 
 const Post = (props) => {
  const {id, content, created, onClick} = props;
- const navigate = new useNavigate();
+ const navigate = useNavigate();
  console.log('navigatePOST-----', navigate);
  console.log('ddannie POST-----', id, content,created, onClick);
   return (
     <article className="article" onClick={()=>onClick(id)} >
+      <hr></hr>
       <h1 className="article__title">НОВЫЙ ПОСТ</h1>
       <p className="article__paragraph">
         `element`{id}
