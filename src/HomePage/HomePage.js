@@ -1,16 +1,16 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 //import {useMatch} from 'react-router-dom';
-import useFetchRequest from '../hook/useFetchRequest';
+//import useFetchRequest from '../hook/useFetchRequest';
 import Post from '../Post/Post';
 import { useNavigate } from 'react-router';
 import './HomePage.css';
-import PostContext from '../PostContext/PostContex';
+import PostContext from '../PostContext/PostContext';
 import { useContext } from 'react';
 import {nanoid} from 'nanoid';
 //import PostProvider from '../PostContext/PostContex';
 
- const HomePage = () => {
+ const HomePage = (props) => {
    //const [data, error, loading] = useFetchRequest(process.env.REACT_APP_URL, []);
 
    /*этот кусок убрали за счет сontex
@@ -26,9 +26,11 @@ import {nanoid} from 'nanoid';
    const blog = useContext(PostContext);
    const {posts, error, loading} = blog;
    console.log('data  через contex HomePage', blog, blog.posts);
-   console.log('posts error loading in HomePage', posts,error,loading);
+   console.log('posts error loading in HomePage', posts,error,loading, blog.posts, posts.length);
+   
    //const match = useMatch();
    //console.log('match in HomePage', match);
+
    const navigate = useNavigate();
    const handlerClick = (id) => navigate(`/posts/${id}`);
 
@@ -37,8 +39,8 @@ import {nanoid} from 'nanoid';
     return () => navigate('/posts');
   }*/
  // const data2 = useContext(PostContext);
-   function loadedList(){
-     console.log('отрисовка постов');
+   function loadedList() {
+    console.log('отрисовка постов');
     return (
       <ul className='list'>
         {posts.map(o => <Post key={nanoid()} id= {o.id} onClick={() => handlerClick(o.id)} content={o.content} created={o.created}/>)}
@@ -54,7 +56,8 @@ import {nanoid} from 'nanoid';
           </NavLink>
         </nav>
         <div className='allPosts'>
-          {(!loading && !error) ? loadedList() : <div>Loading ...</div>}
+          {(!loading && !error && (posts.length !==0)) ? loadedList() : <div>No posts...</div>}
+          {loading && <div>Loading ...</div>}
           {error && <div>{error.text}</div>}
         </div>
      </>

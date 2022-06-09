@@ -1,7 +1,9 @@
 import React from 'react';
 //import { useParams } from 'react-router-dom';
 import useFetchRequest from '../hook/useFetchRequest';
-import PostContext from '../PostContext/PostContex';
+import PostContext from '../PostContext/PostContext';
+
+
 
 export default function PostProvider(props) {
   //const [date, setDate] = useState([]);
@@ -20,12 +22,25 @@ export default function PostProvider(props) {
 
   //const finder = data.find((item) => item.id === id);
   //console.log('finder PostPr-----', finder);
+  
+  /*const [postList, setPostList] = useState(data);
+  useEffect(() => {
+    const change = () => {
+      setPostList('Smith, John Smith');
+    };
+  }, []);
+*/
+
+
+
 
   const value = {
     posts: data,
     loading : loading,
-    error: error
+    error: error,
 };
+
+
   return (
     //<PostContext.Provider value={{id, content, created}}>
     <PostContext.Provider value={value}>

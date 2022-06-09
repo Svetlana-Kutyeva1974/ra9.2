@@ -39,10 +39,12 @@ export default function useFetchRequest(url, opts={header: {
           console.log(' !!!перезаписанный data fetch ---\n', data);
           }
           else {
-            setData({id : `1`,
+            /*setData({id : `1`,
             content :'привет',
             created : '2014-12-12'
             });
+            */
+            setData([]);
           }
           setErrorMessage(null);
           //setLoading(false);
@@ -57,7 +59,7 @@ export default function useFetchRequest(url, opts={header: {
       }
       timerId();
       //return () => clearTimeout(timerId);
-      },[url, opts.body, opts.method]);//},[url,opts]);
+      },[url, opts.body, opts.method ]);//},[url,opts]);
 
   console.log('return fetcha ---', data, loading, errorMessage, opts);
  

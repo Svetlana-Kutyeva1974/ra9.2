@@ -8,7 +8,9 @@ import HomePage from './HomePage/HomePage';
 import PostProvider from './PostProvider/PostProvider';
 import Page404 from './Page404/Page404';
 
- const App = (props) =>
+
+
+ const App = () =>
   (
   <>  
     <PostProvider>

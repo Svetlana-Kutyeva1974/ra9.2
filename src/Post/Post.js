@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import moment from 'moment';
 import 'moment/locale/ru';
 
+
 moment.locale('ru');
 
 const Post = (props) => {
@@ -13,10 +14,13 @@ const Post = (props) => {
  const navigate = useNavigate();
  console.log('navigatePOST-----', navigate);
  console.log('ddannie POST-----', id, content,created, onClick);
+ //console.log('props.macth=', props.match);
+   // console.log('props.location=', props.location);
+    //console.log('props.history=', props.history);
   return (
     <article className="article" onClick={()=>onClick(id)} >
-      <hr></hr>
-      <h1 className="article__title">НОВЫЙ ПОСТ</h1>
+      
+      <h1 className="article__title">ПОСТ# {id}</h1>
       <p className="article__paragraph">
         `element`{id}
       </p>
