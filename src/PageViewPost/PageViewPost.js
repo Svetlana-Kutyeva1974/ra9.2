@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import { Navigate } from 'react-router-dom';
+//import { Navigate } from 'react-router-dom';
 import { useParams} from 'react-router-dom';
 import PostContext from '../PostContext/PostContext';
 import {useNavigate} from 'react-router';
@@ -51,7 +51,7 @@ const PageViewPost = (props) => {
    const handlerClickDelete = (id) => {
     DeleteId(id);
     navigate(`/`);
-    return <HomePage />;
+    return <HomePage />;// это , не нужно?
     //return <Navigate to="/"/>
    }
    const handlerClickChange = (id) => navigate(`/`);

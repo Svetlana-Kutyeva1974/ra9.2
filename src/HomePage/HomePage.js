@@ -26,7 +26,7 @@ import {nanoid} from 'nanoid';
    const blog = useContext(PostContext);
    const {posts, error, loading} = blog;
    console.log('data  через contex HomePage', blog, blog.posts);
-   console.log('posts error loading in HomePage', posts,error,loading, blog.posts, posts.length);
+   console.log('posts error loading in HomePage', posts,error,loading, blog.posts);
    
    //const match = useMatch();
    //console.log('match in HomePage', match);
@@ -56,7 +56,7 @@ import {nanoid} from 'nanoid';
           </NavLink>
         </nav>
         <div className='allPosts'>
-          {(!loading && !error && (posts.length !==0)) ? loadedList() : <div>No posts...</div>}
+          {(!loading && !error && (posts !== null)) ? loadedList() : <div>No posts...</div>}
           {loading && <div>Loading ...</div>}
           {error && <div>{error.text}</div>}
         </div>

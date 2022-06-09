@@ -1,12 +1,13 @@
 import React from 'react';
-//import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import useFetchRequest from '../hook/useFetchRequest';
 import PostContext from '../PostContext/PostContext';
-
+import {useNavigate} from 'react-router';
 
 
 export default function PostProvider(props) {
   //const [date, setDate] = useState([]);
+  const navigate = useNavigate();
   const [data, error, loading] = useFetchRequest(process.env.REACT_APP_URL, {
     header:{
        'Content - Type': 'application/json'
@@ -30,16 +31,37 @@ export default function PostProvider(props) {
     };
   }, []);
 */
-
-
-
+/*
 
   const value = {
     posts: data,
     loading : loading,
     error: error,
-};
-
+ };
+*/
+  const [value, setValue] = useState({
+    posts: data,
+    loading : loading,
+    error: error,
+ });
+ console.log('value destr-----', value, value.posts,value.error);
+ 
+ useEffect(() => {
+  fetch(`process.env.REACT_APP_URL`,{
+    header:{
+       'Content - Type': 'application/json'
+   },
+    method: 'GET',
+    body: null
+  })
+            .then(response=>response.json())
+            .then((value)=>{
+              console.log('esho destr-----', value);
+             setValue((prevValue)=> ({...prevValue, posts: value})); 
+            })
+}, [navigate]);
+  
+console.log('value2-----', value);
 
   return (
     //<PostContext.Provider value={{id, content, created}}>
