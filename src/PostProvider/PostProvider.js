@@ -47,7 +47,7 @@ export default function PostProvider(props) {
  console.log('value destr-----', value, value.posts,value.error);
  
  useEffect(() => {
-  fetch(`process.env.REACT_APP_URL`,{
+  fetch(process.env.REACT_APP_URL,{
     header:{
        'Content - Type': 'application/json'
    },
