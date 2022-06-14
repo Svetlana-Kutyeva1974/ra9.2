@@ -14,15 +14,13 @@ const Post = (props) => {
  const navigate = useNavigate();
  console.log('navigatePOST-----', navigate);
  console.log('ddannie POST-----', id, content,created, onClick);
- //console.log('props.macth=', props.match);
-   // console.log('props.location=', props.location);
-    //console.log('props.history=', props.history);
+ 
   return (
     <article className="article" onClick={()=>onClick(id)} >
       
       <h1 className="article__title">ПОСТ# {id}</h1>
       <p className="article__paragraph">
-        `element`{id}
+        `any element`
       </p>
       <div className="article__content">{content}</div>
       <div className="article__date">Создано: {moment(new Date(created)).startOf('day').fromNow()}</div>
@@ -30,10 +28,3 @@ const Post = (props) => {
   )
 }
 export default Post;
-/*
-moment("20111031", "YYYYMMDD").fromNow(); // 11 years ago
-moment("20120620", "YYYYMMDD").fromNow(); // 10 years ago
-moment().startOf('day').fromNow();        // a minute ago
-moment().endOf('day').fromNow();          // in a day
-moment().startOf('hour').fromNow();      // minuty ago
-*/

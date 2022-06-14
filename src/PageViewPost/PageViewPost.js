@@ -7,7 +7,8 @@ import {useNavigate} from 'react-router';
 import './PageViewPost.css';
 import React from 'react';
 import HomePage from '../HomePage/HomePage';
-
+//import PageCreateNew from '../PageCreateNew/PageCreateNew';
+//import PageChange from '../PageChange/PageChange';
 
 const PageViewPost = (props) => {
  /* const DeleteId = (id) => {
@@ -40,23 +41,13 @@ const PageViewPost = (props) => {
     }*/
   }
 
-
    const params = useParams();
 
    const navigate = useNavigate();
    const goHome = () => navigate('/');
    //const location = useLocation();
 
-   //const Redirect = <Navigate to="/post:id" replace={true} state={{from: '/'}} />
-   const handlerClickDelete = (id) => {
-    DeleteId(id);
-    navigate(`/`);
-    return <HomePage />;// это , не нужно?
-    //return <Navigate to="/"/>
-   }
-   const handlerClickChange = (id) => navigate(`/`);
-
-   console.log('params=', params, params.id, props, navigate);
+   console.log('params====', params, params.id, props, navigate);
     // получаем досуп к контексту блога
     const blog = useContext(PostContext);
 
@@ -71,17 +62,33 @@ const PageViewPost = (props) => {
     
    console.log('через contex ViewPage', blog, blog.posts, blog.posts.length );
     
+
+   //const Redirect = <Navigate to="/post:id" replace={true} state={{from: '/'}} />
+   const handlerClickDelete = (id) => {
+    DeleteId(id);
+    navigate(`/`);
+    return <HomePage />;// это , не нужно?
+    //return <Navigate to="/"/>
+   }
+
+   // заглушка была:const handlerClickChange = (id) => navigate(`/`);
+   const handlerClickChange = (id) => {
+    console.log('posts id на замену',id);
+    return navigate(`/postsChange/${id}`);
+
+   };
+
+
   //return ((post || blog.posts.length !==0) ? (
   return ((post) ? (
     <article className="article">
         <h3 className="article__title">ВЫБРАН ПОСТ (#{post.id})</h3>
         <p className="article__paragraph"> Содержимое: {post.content}</p>
         <p className="article__paragraph"> Создан: {post.created}</p>
-        
        
         <button className="btn" onClick={() => goHome()}>Назад</button>
-        <button className="btn2" onClick={(id) => handlerClickChange(parseInt(params.id))}>Изменить</button>
-        <button className="btn2" onClick={(id) => handlerClickDelete(parseInt(params.id))}>Удалить</button>
+        <button className="btn2" onClick={() => handlerClickChange(parseInt(params.id))}>Изменить</button>
+        <button className="btn2" onClick={() => handlerClickDelete(parseInt(params.id))}>Удалить</button>
         
     </article>
   ) : (
@@ -92,27 +99,3 @@ const PageViewPost = (props) => {
 
 export default PageViewPost;
 
-//<button className="btn2" onClick={()=> Redirect}>Изменить</button>
-// (<button className="btn2" onClick={(id) => handlerClickChange(id)}>Изменить</button>)
-
-/*<button className="btn" onClick={() => props.history.goBack()}>Back</button>
-return (post ? (
-            <div>
-                <h3>{post.title} (#{post.id})</h3>
-                <p > {post.content}</p>
-            </div>
-        ) : (
-            <p>Post not found</p>
-        )
-    )
-*/
-
-/*
-<article className="article">
-      <h1 className="article__title">ВЫБРАН ПОСТ 
-      {props.id}</h1>
-      <p className="article__paragraph">
-        Страница с выбранным постом
-      </p>
-    </article>
-*/
