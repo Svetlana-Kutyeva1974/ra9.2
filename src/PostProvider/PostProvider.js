@@ -57,7 +57,7 @@ export default function PostProvider(props) {
             .then(response=>response.json())
             .then((value)=>{
               console.log('esho destr-----', value);
-             setValue((prevValue)=> ({...prevValue, posts: value})); 
+             setValue((prevValue)=> ({...prevValue, posts: value, error: null, loading: false}));//error: null, loading: false
             })
 }, [navigate]);
   
