@@ -10,7 +10,7 @@ function Form({ submitForm, id='' }) {
   const title = (id==='') ? `New Post`: `Change Post`;
   const title2 = (id ==='') ? `Опубликовать`: `Сохранить`;
   
-  console.log('id form+ titl',id, title);
+  console.log('id form+ titl',id, title, title2);
   
   const navigate = useNavigate();
   const handlerClick = () => navigate(`/`);
@@ -23,7 +23,7 @@ function Form({ submitForm, id='' }) {
   
 
   if (id !== '') {
-    postCurrent = blog.posts.find(item => String(item.id) === id);//String(item.id) =id
+    postCurrent = blog.posts.find(item => item.id === Number(id));//String(item.id) =id
     console.log('posts Change Form', id, blog.posts,'postCurrent\n', 
     postCurrent, postCurrent.content, postCurrent.id, postCurrent.created);
     /*setForm((prev)=>{

@@ -3,83 +3,48 @@ import {useContext} from 'react';
 import { useParams} from 'react-router-dom';
 import PostContext from '../PostContext/PostContext';
 import {useNavigate} from 'react-router';
-//import useFetchRequest from '../hook/useFetchRequest';
 import './PageViewPost.css';
 import React from 'react';
-import HomePage from '../HomePage/HomePage';
-//import PageCreateNew from '../PageCreateNew/PageCreateNew';
-//import PageChange from '../PageChange/PageChange';
+//import HomePage from '../HomePage/HomePage';
 
 const PageViewPost = (props) => {
- /* const DeleteId = (id) => {
-    const [data, error, loading] = useFetchRequest(`${process.env.REACT_APP_URL}/${id}`, {
-      header:{
-         'Content - Type': 'application/json'
-     },
-      method: 'DELETE',
-      body: null
-    });
-    // console.log('props after del-----',props);
-    console.log('data,error,url,load after del-----', data, error, process.env.REACT_APP_URL+ `${id}`, loading);
-    
-  }*/
- 
-
-
   async function DeleteId (id) {
-    console.log(' delete url=========', process.env.REACT_APP_URL+`${params.id}`, id);
     let response = await fetch(`${process.env.REACT_APP_URL}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       }
     });
-    console.log('result delete=========', response);
-    // не нужен код ниже, т.к. удалили все вручную и на сервере и в state
-    /*if (response.status === 204) {
-      loadActual();
-    }*/
+    console.log('result delete==', response);
   }
 
-   const params = useParams();
+  const params = useParams();
 
-   const navigate = useNavigate();
-   const goHome = () => navigate('/');
-   //const location = useLocation();
-
-   console.log('params====', params, params.id, props, navigate);
+  const navigate = useNavigate();
+  const goHome = () => navigate('/');
+    //console.log('params====', params, params.id, props, navigate);
     // получаем досуп к контексту блога
-    const blog = useContext(PostContext);
+  const blog = useContext(PostContext);
 
-    const {error, loading} = blog;
-    console.log('posts error loading in HomePage',error,loading);
-
+  //const {error, loading} = blog;
     // получаем идентификатор поста блога
-    //const id = parseInt(match.params.id);
-    const id = parseInt(params.id);
+  const id = parseInt(params.id);
     // находим пост по идентификатору
-    const post = blog.posts.find(item => item.id === id);
-    
-   console.log('через contex ViewPage', blog, blog.posts, blog.posts.length );
-    
-
-   //const Redirect = <Navigate to="/post:id" replace={true} state={{from: '/'}} />
-   const handlerClickDelete = (id) => {
+  const post = blog.posts.find(item => item.id === id);
+      
+  const handlerClickDelete = (id) => {
     DeleteId(id);
     navigate(`/`);
-    return <HomePage />;// это , не нужно?
-    //return <Navigate to="/"/>
-   }
+      //return <HomePage />;// это , не нужно?
+      //return <Navigate to="/"/>
+  }
 
    // заглушка была:const handlerClickChange = (id) => navigate(`/`);
-   const handlerClickChange = (id) => {
+  const handlerClickChange = (id) => {
     console.log('posts id на замену',id);
     return navigate(`/postsChange/${id}`);
+  };
 
-   };
-
-
-  //return ((post || blog.posts.length !==0) ? (
   return ((post) ? (
     <article className="article">
         <h3 className="article__title">ВЫБРАН ПОСТ (#{post.id})</h3>

@@ -1,76 +1,68 @@
-//import {Redirect} from 'react-router';
-// import { Route, Redirect } from 'react-router';
 import {NavLink} from 'react-router-dom';
-// import { useEffect, useState } from 'react';
 import { useState } from 'react';
-//import {nanoid} from 'nanoid';
 import './PageCreateNew.css';
 import Form from '../Form/Form';
-import HomePage from '../HomePage/HomePage';
+//import HomePage from '../HomePage/HomePage';
 import PostContext from '../PostContext/PostContext';
 import {useContext} from 'react';
 import {useNavigate} from 'react-router';
-//import {now} from 'moment';
 
 const PageCreateNew = ({id = ''}) => {
-  console.log('создаем или изменяем',id);
+  //console.log('создаем или изменяем',id);
   const navigate = useNavigate();
-
-  //const handlerClick = (id) => navigate(`/`);
 
   const blog = useContext(PostContext);
   console.log('posts error loading in PageCreate',blog.posts, blog.posts.length, blog.error,blog.loading);
-  const post = blog.posts.find(item => item.id === id);
-  console.log('меняем это(undef=создаем)',post);
+  //const post = blog.posts.find(item => item.id === id);
+  //console.log('меняем это(undef=создаем)',post);
 
-const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-const loadActual = () => {
-  console.log(process.env.REACT_APP_URL);
-  fetch(process.env.REACT_APP_URL, {headers: {
-    'Content-Type': 'application/json', method:'GET', body: null
-  }})
-  .then(response => response.json())
-  .then(posts => {
-  setPosts(posts);
-  console.log(' массив заметок после загрузки и set',posts);
-  navigate('/');
-  return <HomePage />;
-  });
-}
-
-
-//-------------------
-const load = (form) => {
-//fetch(process.env.REACT_APP_NOTES_URL, {
-fetch(process.env.REACT_APP_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(form),
-}).then(result => {
-    if (result.status === 204) {
-        loadActual();
-    }
-});
-}
-
-function submitForm(form) {
-  let add;
-  if (form.content !== '' ) {
-    //const add = [...blog.posts, {id: blog.posts.length+1, content: form.content, created: Date.now()}];
-    if (id ==='' || id=== undefined) {
-    add = [...blog.posts, {content: form.content, created: new Date()}];
-    } else{
-    add = [...blog.posts, {content: form.content, created: post.created}];
-    }
-    console.log(' submit--массив заметок после добавки нового', add);
-    setPosts(add);
-    console.log(' массив заметок после submit',posts);
-    load(add[add.length-1]);
+  const loadActual = () => {
+    fetch(process.env.REACT_APP_URL, {headers: {
+      'Content-Type': 'application/json', method:'GET', body: null
+    }})
+    .then(response => response.json())
+    .then(posts => {
+      setPosts(posts);
+      navigate('/');
+      //return <HomePage />;
+    });
   }
-} 
+
+
+ //-------------------
+  const load = (form) => {
+  fetch(process.env.REACT_APP_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form),
+  }).then(result => {
+      if (result.status === 204) {
+          loadActual();
+      }
+  });
+  }
+
+  function submitForm(form) {
+    let add;
+    if (form.content !== '' ) {
+      if (id ==='' || id=== undefined) {
+      add = [...blog.posts, {id: '',content: form.content, created: Date.now()}];
+      } 
+      /*else{
+      add = [...blog.posts, {content: form.content, created: post.created}];
+      }*/
+      //console.log(' submit--массив заметок после добавки нового', add);
+      setPosts(add);
+      console.log(' массив заметок после set!',posts);
+      
+      load(add[add.length-1]);
+      //return navigate('/');
+    }
+  } 
 
   return (
    <>
@@ -97,21 +89,10 @@ function submitForm(form) {
        Имя: ___
       </p>
       
-      <Form submitForm={submitForm} id={id}/>
+      <Form submitForm={submitForm}/>
     </article>
     
     </>
   )
 }
 export default PageCreateNew;
-//<Redirect from='/PageCreateNew' to='/' />
-
-/*
-<Form submitForm={submitForm}/>
-*/
-
-/*
- <NavLink to='/' className={'menu__item'}>
-            <span className='sss'>Опубликовать пост</span>
-          </NavLink>
-*/

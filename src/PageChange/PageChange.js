@@ -1,29 +1,23 @@
-//import {Redirect} from 'react-router';
-// import { Route, Redirect } from 'react-router';
 import {NavLink} from 'react-router-dom';
-// import { useEffect, useState } from 'react';
 import { useState } from 'react';
-//import {nanoid} from 'nanoid';
 import './PageChange.css';
 import Form from '../Form/Form';
-import HomePage from '../HomePage/HomePage';
+//import HomePage from '../HomePage/HomePage';
 import PostContext from '../PostContext/PostContext';
 import {useContext} from 'react';
 import {useNavigate} from 'react-router';
 import { useParams} from 'react-router-dom';
-//import {now} from 'moment';
 
 const PageChange = ({id}) => {
   console.log('изменяем',id);
   const navigate = useNavigate();
-  const params = useParams();
-  console.log('params change====', params, params.id);
-  //const handlerClick = (id) => navigate(`/`);
+  const params = useParams();//console.log('params change====', params, params.id);
+ 
 
   const blog = useContext(PostContext);
   console.log('posts in PageChange',blog.posts, blog.posts.length, blog.error,blog.loading);
-  const post = blog.posts.find(item => String(item.id) === params.id);
-  const postInd= blog.posts.findIndex(item => String(item.id) === params.id);
+  const post = blog.posts.find(item => item.id === Number(params.id));//String(item.id) === params.id
+  const postInd= blog.posts.findIndex(item => item.id === Number(params.id));//
   console.log('меняем это',post);
 
   const [posts, setPosts] = useState([]);
@@ -36,9 +30,8 @@ const PageChange = ({id}) => {
     .then(response => response.json())
     .then(posts => {
     setPosts(posts);
-    console.log(' массив после загрузки и set',posts);
     navigate('/');
-    return <HomePage />;
+    //return (<HomePage />);
     });
   }
 
@@ -59,17 +52,14 @@ const PageChange = ({id}) => {
   }
 
   function submitForm(form) {
-    let add;
-    if (form.content !== '' ) {
-      //const add = [...blog.posts, {id: blog.posts.length+1, content: form.content, created: Date.now()}];
     
-      add = [...blog.posts, { content: form.content, created: post.created}];
-      console.log(' submit--массив  после Change', add);
-      setPosts(add);
-      console.log(' массив после Change submit',posts);
-      //load(add[add.length-1]);
-      //load({id: id, content: form.content, created: post.created});
-      load(add[postInd]);
+    if (form.content !== '' ) {      
+      blog.posts[postInd].content = form.content;
+      console.log(' submit--массив posts  после Change', blog.posts);
+      setPosts(blog.posts);
+      console.log(posts);     
+      //console.log(' загружаем это на сервер',blog.posts[postInd]);
+      load(blog.posts[postInd]);
     }
   } 
 
@@ -99,6 +89,7 @@ const PageChange = ({id}) => {
       </p>
       
       <Form submitForm={submitForm} id={params.id}/>
+
     </article>
     
     </>
