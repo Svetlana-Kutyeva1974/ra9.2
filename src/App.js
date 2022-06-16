@@ -6,7 +6,7 @@ import PageViewPost from './PageViewPost/PageViewPost';
 import PageChange from './PageChange/PageChange';
 import HomePage from './HomePage/HomePage';
 import PostProvider from './PostProvider/PostProvider';
-import Page404 from './Page404/Page404';
+//import Page404 from './Page404/Page404';
 
  const App = () =>
   (
