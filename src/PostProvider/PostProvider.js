@@ -28,11 +28,10 @@ export default function PostProvider(props) {
     method: 'GET',
     body: null
   })
-            .then(response=>response.json())
-            .then((value)=>{
-             setValue((prevValue)=> ({...prevValue, posts: value, error: null, loading: false}));//error: null, loading: false
-      
-            })
+    .then(response=>response.json())
+    .then((value)=>{
+       setValue((prevValue)=> ({...prevValue, posts: value, error: null, loading: false}));//error: null, loading: false
+    })
 }, [navigate]);
 
   return (

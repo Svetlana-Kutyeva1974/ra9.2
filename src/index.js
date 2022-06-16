@@ -12,4 +12,3 @@ root.render(
     </Router>
   </React.StrictMode>
 );
-//</React.StrictMode>
