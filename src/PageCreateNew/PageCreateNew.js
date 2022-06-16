@@ -61,7 +61,7 @@ const PageCreateNew = ({id = ''}) => {
 
         const post = blog.posts.find(item => item.id === Number(params.id));//String(item.id) === params.id
         const postInd= blog.posts.findIndex(item => item.id === Number(params.id));//
-        //console.log('меняем это',post);
+        console.log('меняем это',post);
 
         blog.posts[postInd].content = form.content;
         setPosts(blog.posts);
