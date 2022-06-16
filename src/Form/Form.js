@@ -25,7 +25,7 @@ function Form({ submitForm, id='' }) {
   }
 
   const [form, setForm] = useState({id: '', content: formContent, created: Date.now()});
-  const val = (id === '') ? '' : postCurrent.content;
+  
 
   function inputForm(evt) {
     console.log('evt+ evt name form',evt,evt.target.name );
@@ -77,6 +77,11 @@ Form.propTypes = {
 }
 
 export default Form;
-// <button className='btn-add2' onClick={handleSubmit}>&#10148;</button>
 
+
+
+
+
+// <button className='btn-add2' onClick={handleSubmit}>&#10148;</button>
+//const val = (id === '') ? '' : postCurrent.content;
 /*placeholder={val}*/ 
