@@ -9,42 +9,33 @@ import { useContext } from 'react';
 function Form({ submitForm, id='' }) {
   const title = (id==='') ? `New Post`: `Change Post`;
   const title2 = (id ==='') ? `Опубликовать`: `Сохранить`;
-  
-  console.log('id form+ titl',id, title, title2);
-  
+  let formContent = ``;
+
   const navigate = useNavigate();
   const handlerClick = () => navigate(`/`);
   
   let postCurrent = {};
-
-  const blog = useContext(PostContext);
-
-  const [form, setForm] = useState({id: '', content: '', created: Date.now()});
-  
+  const blog = useContext(PostContext);  
 
   if (id !== '') {
     postCurrent = blog.posts.find(item => item.id === Number(id));//String(item.id) =id
     console.log('posts Change Form', id, blog.posts,'postCurrent\n', 
     postCurrent, postCurrent.content, postCurrent.id, postCurrent.created);
-    /*setForm((prev)=>{
-    return {...prev, id: id, content: postCurrent.content, created: postCurrent.created};
-    })*/
+    formContent = postCurrent.content;
   }
-  
-  const val = (id === '') ? '' : postCurrent.content;
-  //const val2 = (id === '') ? 'post' : '';
 
-  console.log('value form',val);
+  const [form, setForm] = useState({id: '', content: formContent, created: Date.now()});
+  const val = (id === '') ? '' : postCurrent.content;
 
   function inputForm(evt) {
     console.log('evt+ evt name form',evt,evt.target.name );
     setForm((prev) => {
       if (evt.target.name === 'post' && id ==='') {
-        console.log('evt+ evt name form id=null',evt.target.name );
+        //console.log('evt+ evt name form id=null',evt.target.name );
         return { ...prev, content: evt.target.value, created: new Date()};
       }
       else if(evt.target.name === 'post' && id !=='') {
-        console.log('evt name form id=id',evt.target.name );
+        //console.log('evt name form id=id',evt.target.name );
         return { ...prev, id: id, content: evt.target.value, created:postCurrent.created };
       }
     })
@@ -67,8 +58,7 @@ function Form({ submitForm, id='' }) {
         <textarea 
           id ='post' 
           name='post' 
-          value={form.post}
-          placeholder={val} 
+          value={form.content}
           onChange={inputForm} required />
       </div>
       
@@ -88,3 +78,5 @@ Form.propTypes = {
 
 export default Form;
 // <button className='btn-add2' onClick={handleSubmit}>&#10148;</button>
+
+/*placeholder={val}*/ 
