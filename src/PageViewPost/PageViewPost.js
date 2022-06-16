@@ -5,7 +5,7 @@ import PostContext from '../PostContext/PostContext';
 import {useNavigate} from 'react-router';
 import './PageViewPost.css';
 import React from 'react';
-//import HomePage from '../HomePage/HomePage';
+import HomePage from '../HomePage/HomePage';
 
 const PageViewPost = (props) => {
   async function DeleteId (id) {
@@ -35,7 +35,7 @@ const PageViewPost = (props) => {
   const handlerClickDelete = (id) => {
     DeleteId(id);
     navigate(`/`);
-      //return <HomePage />;// это , не нужно?
+    return <HomePage />;// это , не нужно?
       //return <Navigate to="/"/>
   }
 

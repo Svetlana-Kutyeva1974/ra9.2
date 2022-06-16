@@ -1,5 +1,6 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import PageCreateNew from './PageCreateNew/PageCreateNew';
 import PageViewPost from './PageViewPost/PageViewPost';
 import PageChange from './PageChange/PageChange';
@@ -13,12 +14,12 @@ import Page404 from './Page404/Page404';
     <PostProvider>
           <div className="page">
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/posts" element={<HomePage />} />
+              <Route path="/" exact element={<Navigate replace to="/posts" />} />
               <Route path="/posts/new" element={<PageCreateNew/>} />
               <Route path="/posts/:id" element={<PageViewPost/>} />
               <Route path="/postsChange/:id" element={<PageChange/>} />
-              <Route path="*" element={<Page404/>}/>
-              
+              <Route path="*" element={<HomePage />}/>
             </Routes>
           </div>
     </PostProvider>
@@ -26,3 +27,6 @@ import Page404 from './Page404/Page404';
   )
 
 export default App;
+//<Route exact path="/">
+//<Redirect to="/posts"/>
+//</Route>

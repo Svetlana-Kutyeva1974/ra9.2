@@ -31,6 +31,7 @@ export default function PostProvider(props) {
             .then(response=>response.json())
             .then((value)=>{
              setValue((prevValue)=> ({...prevValue, posts: value, error: null, loading: false}));//error: null, loading: false
+      
             })
 }, [navigate]);
 
